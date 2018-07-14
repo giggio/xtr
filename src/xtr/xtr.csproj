@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackAsTool>true</PackAsTool>
+    <RootNamespace>Xtr</RootNamespace>
+    <Version>0.1.0</Version>
+    <Authors>Giovanni Bassi</Authors>
+    <PackageTags>xtr</PackageTags>
+    <RepositoryUrl>https://github.com/giggio/xtr.git</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/giggio/xtr/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/giggio/xtr</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>A tool that helps you extract information from web pages, specially links.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="docopt.net" Version="0.6.1.9" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.5" />
+    <PackageReference Include="Selenium.Support" Version="3.13.1" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.13.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.40.0" />
+  </ItemGroup>
+</Project>
