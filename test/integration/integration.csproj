@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
     <PackageReference Include="docopt.net" Version="0.6.1.9" />
     <PackageReference Include="HtmlAgilityPack" Version="1.8.5" />
-    <PackageReference Include="Selenium.Support" Version="3.13.1" />
+    <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.13.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.40.0" />
   </ItemGroup>
