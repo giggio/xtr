@@ -16,13 +16,34 @@ namespace Xtr
 
         public Parser(Uri uri) => this.uri = uri;
 
-        public IList<Link> GetLinks(bool includeEmpty, bool includeHashLink, bool includeJavaScriptLink)
+        public IList<Link> GetLinks(bool includeEmpty, bool includeHashLink,
+            bool includeJavaScriptLink)
+        {
+            return GetLinks(includeEmpty, includeHashLink, includeJavaScriptLink, false);
+        }
+
+        public IList<Link> GetLinks(bool includeEmpty, bool includeHashLink, bool includeJavaScriptLink, bool includeHeaderLinks)
         {
             if (doc == null || !doc.DocumentNode.ChildNodes.Any())
                 return new List<Link>();
             var linkNodes = doc.DocumentNode.SelectNodes("//a");
+            if (includeHeaderLinks)
+            {
+                var linkHeadNodes = doc.DocumentNode.SelectNodes("//link");
+                foreach (var linkHeadNode in linkHeadNodes)
+                {
+                    linkNodes.Add(linkHeadNode);
+                }
+            }
             var links = from linkNode in linkNodes
-                        select new Link { Href = linkNode.Attributes["href"]?.Value?.Trim() ?? "", Value = WebUtility.HtmlDecode(linkNode.InnerText?.Trim() ?? "") };
+                select new Link
+                {
+                    Href = linkNode.Attributes["href"]?.Value?.Trim() ?? "",
+                    Value = linkNode.Name == "a" ?
+                        WebUtility.HtmlDecode(linkNode.InnerText?.Trim() ?? "") :
+                        linkNode.Attributes["rel"]?.Value?.Trim() ?? ""
+                };
+
             if (!includeEmpty)
                 links = links.Where(l => l.Href != "" && l.Value != "");
             if (!includeHashLink)

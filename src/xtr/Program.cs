@@ -31,7 +31,11 @@ namespace Xtr
                 return 1;
             }
             var parser = CreateParser(arguments);
-            var links = parser.Parse().GetLinks(includeEmpty: arguments.IncludeEmptyLinks, includeHashLink: arguments.IncludeHashLinks, includeJavaScriptLink: arguments.IncludeJavaScriptLinks);
+            var links = parser.Parse().GetLinks(
+                includeEmpty: arguments.IncludeEmptyLinks,
+                includeHashLink: arguments.IncludeHashLinks,
+                includeJavaScriptLink: arguments.IncludeJavaScriptLinks,
+                includeHeaderLinks: arguments.IncludeRelLinks);
             var linksText = GetLinksText(links);
             if (!string.IsNullOrWhiteSpace(arguments.Output))
                 File.WriteAllText(arguments.Output, linksText);
