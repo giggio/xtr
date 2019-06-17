@@ -22,14 +22,19 @@ namespace Xtr
             return GetLinks(includeEmpty, includeHashLink, includeJavaScriptLink, false);
         }
 
-        public IList<Link> GetLinks(bool includeEmpty, bool includeHashLink, bool includeJavaScriptLink, bool includeHeaderLinks)
+        public IList<Link> GetLinks(bool includeEmpty, bool includeHashLink, bool includeJavaScriptLink, bool includeRelLinks)
         {
             if (doc == null || !doc.DocumentNode.ChildNodes.Any())
                 return new List<Link>();
-            var linkNodes = doc.DocumentNode.SelectNodes("//a");
-            if (includeHeaderLinks)
+            HtmlNodeCollection linkNodes = doc.DocumentNode.SelectNodes("//a");
+            if (includeRelLinks)
             {
                 var linkHeadNodes = doc.DocumentNode.SelectNodes("//link");
+                if (linkNodes == null && linkHeadNodes != null)
+                {
+                    //there aren't <a> nodes but there are <link> nodes
+                    linkNodes = new HtmlNodeCollection(doc.DocumentNode);
+                }
                 foreach (var linkHeadNode in linkHeadNodes)
                 {
                     linkNodes.Add(linkHeadNode);

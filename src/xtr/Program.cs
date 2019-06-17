@@ -35,7 +35,7 @@ namespace Xtr
                 includeEmpty: arguments.IncludeEmptyLinks,
                 includeHashLink: arguments.IncludeHashLinks,
                 includeJavaScriptLink: arguments.IncludeJavaScriptLinks,
-                includeHeaderLinks: arguments.IncludeRelLinks);
+                includeRelLinks: arguments.IncludeRelLinks);
             var linksText = GetLinksText(links);
             if (!string.IsNullOrWhiteSpace(arguments.Output))
                 File.WriteAllText(arguments.Output, linksText);
