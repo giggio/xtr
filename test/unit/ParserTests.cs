@@ -126,5 +126,30 @@ namespace Unit
             link.Href.Should().Be("foo");
             link.Value.Should().Be("aãb");
         }
+
+        [Test]
+        public void CaptureRelLinks()
+        {
+            var html = @"<html><head><link rel=""foo"" href=""http://example.com""/></head><body></body></html>";
+            var p = new Parser(html);
+            var links = p.Parse().GetLinks(includeEmpty: true, includeHashLink: true, includeJavaScriptLink: true, true);
+            var link = links.Single();
+            link.Href.Should().Be("http://example.com");
+            link.Value.Should().Be("foo");
+        }
+
+        [Test]
+        public void CaptureHrefAndRelLinks()
+        {
+            var html = @"<html><head><link rel=""foo"" href=""http://example.com""/></head><body><a href=""bar"">baz</a></body></html>";
+            var p = new Parser(html);
+            var links = p.Parse().GetLinks(includeEmpty: true, includeHashLink: true, includeJavaScriptLink: true, true);
+            var link = links[0];
+            link.Href.Should().Be("bar");
+            link.Value.Should().Be("baz");
+            link = links[1];
+            link.Href.Should().Be("http://example.com");
+            link.Value.Should().Be("foo");
+        }
     }
 }
