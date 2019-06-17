@@ -1,8 +1,6 @@
 using DocoptNet;
 using System;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Xtr
@@ -20,6 +18,7 @@ Options:
   --use-browser, -b                 Use a browser to fetch the contents [default: false]
   --include-empty-links, -e         Include links without href or value [default: false]
   --include-hash-links, -#          Include links with # on href [default: false]
+  --include-rel-links, -r           Include rel links in head [default: false]
   --include-js-links, -j            Include links with 'javascript:' on  href [default: false]
   --verbose                         Verbose install and run [default: false]
   --version, -v                     Show version number
@@ -35,6 +34,7 @@ Options:
             UseBrowser = args["--use-browser"].IsTrue;
             IncludeEmptyLinks = args["--include-empty-links"].IsTrue;
             IncludeHashLinks = args["--include-hash-links"].IsTrue;
+            IncludeRelLinks = args["--include-rel-links"].IsTrue;
             IncludeJavaScriptLinks = args["--include-js-links"].IsTrue;
             InputRedirected = args["-"].IsTrue;
             if (!string.IsNullOrWhiteSpace(args["--output"]?.Value as string))
@@ -55,6 +55,7 @@ Options:
         public bool IncludeEmptyLinks { get; }
         public bool IncludeJavaScriptLinks { get; }
         public bool IncludeHashLinks { get; }
+        public bool IncludeRelLinks { get; }
         public bool InputRedirected { get; }
     }
 }

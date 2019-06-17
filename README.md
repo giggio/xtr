@@ -54,6 +54,7 @@ Run `xtr` with `--help`  to see possible options. Here we document a few:
 * `--use-browser` - Use a browser to fetch the contents [default: false]
 * `--include-empty-links` - Include links without href or value [default: false]
 * `--include-hash-links` - Include links with # on href [default: false]
+* `--include-rel-links` - Include rel links in the header [default: false]
 * `--include-js-links` - Include links with 'javascript:' on  href [default: false]
 
 ## Testing install during development

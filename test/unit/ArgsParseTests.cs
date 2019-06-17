@@ -46,13 +46,14 @@ namespace Unit
         public void ParseOptionsAvailableBefore()
         {
             const string output = "output";
-            var args = new[] { "--use-browser", "--include-empty-links", "--include-hash-links", "--include-js-links", "--output", output, "--verbose", "<html></html>" };
+            var args = new[] { "--use-browser", "--include-empty-links", "--include-hash-links", "--include-rel-links", "--include-js-links", "--output", output, "--verbose", "<html></html>" };
             var arguments = new MainArgs(args);
             arguments.Output.Should().Be(Path.Combine(Environment.CurrentDirectory, output));
             arguments.Verbose.Should().BeTrue();
             arguments.UseBrowser.Should().BeTrue();
             arguments.IncludeEmptyLinks.Should().BeTrue();
             arguments.IncludeHashLinks.Should().BeTrue();
+            arguments.IncludeRelLinks.Should().BeTrue();
             arguments.IncludeJavaScriptLinks.Should().BeTrue();
         }
 
@@ -60,13 +61,14 @@ namespace Unit
         public void ParseOptionsAvailableAfter()
         {
             const string output = "output";
-            var args = new[] { "<html></html>", "--output", output, "--verbose", "--use-browser", "--include-empty-links", "--include-hash-links", "--include-js-links" };
+            var args = new[] { "<html></html>", "--output", output, "--verbose", "--use-browser", "--include-empty-links", "--include-hash-links", "--include-rel-links", "--include-js-links" };
             var arguments = new MainArgs(args);
             arguments.Output.Should().Be(Path.Combine(Environment.CurrentDirectory, output));
             arguments.Verbose.Should().BeTrue();
             arguments.UseBrowser.Should().BeTrue();
             arguments.IncludeEmptyLinks.Should().BeTrue();
             arguments.IncludeHashLinks.Should().BeTrue();
+            arguments.IncludeRelLinks.Should().BeTrue();
             arguments.IncludeJavaScriptLinks.Should().BeTrue();
         }
 
@@ -88,6 +90,7 @@ namespace Unit
             arguments.UseBrowser.Should().BeFalse();
             arguments.IncludeEmptyLinks.Should().BeFalse();
             arguments.IncludeHashLinks.Should().BeFalse();
+            arguments.IncludeRelLinks.Should().BeFalse();
             arguments.IncludeJavaScriptLinks.Should().BeFalse();
         }
 
@@ -95,12 +98,13 @@ namespace Unit
         public void ParseOptionsAvailableShort()
         {
             const string output = "output";
-            var args = new[] { "<html></html>", "-o", output, "-b", "-e", "-#", "-j" };
+            var args = new[] { "<html></html>", "-o", output, "-b", "-e", "-#", "-j", "-r" };
             var arguments = new MainArgs(args);
             arguments.Output.Should().Be(Path.Combine(Environment.CurrentDirectory, output));
             arguments.UseBrowser.Should().BeTrue();
             arguments.IncludeEmptyLinks.Should().BeTrue();
             arguments.IncludeHashLinks.Should().BeTrue();
+            arguments.IncludeRelLinks.Should().BeTrue();
             arguments.IncludeJavaScriptLinks.Should().BeTrue();
         }
 
